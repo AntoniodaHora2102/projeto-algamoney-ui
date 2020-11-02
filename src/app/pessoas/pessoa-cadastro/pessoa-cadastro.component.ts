@@ -12,4 +12,5 @@ export class PessoaCadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }

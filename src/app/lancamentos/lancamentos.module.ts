@@ -12,7 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
+
 import { LancamentoPesquisaComponent } from './lancamento-pesquisa/lancamento-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { FormsModule } from '@angular/forms';
@@ -21,8 +21,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     LancamentoCadastroComponent,
-    LancamentoPesquisaComponent,
-    LancamentosGridComponent
+    LancamentoPesquisaComponent
   ],
   exports: [
     LancamentoCadastroComponent,

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastyConfig } from 'ng2-toasty';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,10 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(
-    private router: Router
-  ) { }
+  constructor(private toastConfig: ToastyConfig, private router: Router) {
+    this.toastConfig.theme = 'bootstrap';
+
+  }
 
   exibindoNavBar() {
     return this.router.url !== '/login';

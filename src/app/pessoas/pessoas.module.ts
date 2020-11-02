@@ -1,6 +1,7 @@
+import { SharedModule } from './../shared/shared.module';
+
 import { InputMaskModule } from 'primeng/inputmask';
 import { PesquisaPessoaComponent } from './pesquisa-pessoa/pesquisa-pessoa.component';
-import { PessoaGridComponent } from './pessoa-grid/pessoa-grid.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
 import { NgModule } from '@angular/core';
@@ -22,7 +23,6 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     PessoaCadastroComponent,
-    PessoaGridComponent,
     PesquisaPessoaComponent
   ],
   exports: [
@@ -41,7 +41,9 @@ import { FormsModule } from '@angular/forms';
     SelectButtonModule,
     DropdownModule,
     InputMaskModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+
+    SharedModule
   ]
 })
 export class PessoasModule { }

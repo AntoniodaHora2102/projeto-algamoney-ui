@@ -1,28 +1,72 @@
 <div class="container">
-  <div class="ui-g">
-    <div>
-      <h1> Pessoas </h1>
-    </div>
+   <div class="ui-g">
 
-    <div class="ui-g-12 ui-fluid">
-      <label>Pessoa</label>
-      <input pInputText type="text">
-    </div>
+        <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-    <div class="ui-g-12">
-      <button pButton type="submit" label="Pesquisar"></button>
-    </div>
+                <div class="ui-g-12">
+                    <h1> Pessoas </h1>
+                </div>
+
+                    <div class="ui-g-12 ui-fluid">
+                      <label>Nome</label>
+                        <input pInputText type="text"
+                        name="nome" [(ngModel)]="filtro.nome">
+                  </div>
+
+                    <div class="ui-g-12">
+                      <button pButton type="submit"
+                      label="Pesquisar"></button>
+                    </div>
+        </form>
+      </div>
+
+    <div class="ui-g">
+        <div class="ui-g-12">
+          <p-table [value]="pessoas" [responsive]="true"
+          [paginator]="true" [rows]="filtro.itensPorPagina"
+           [lazy]="true" [totalRecords]="totalRegistros"
+           (onLazyLoad)="aoMudarPagina($event)" #tabela_pessoa>
+                     <ng-template pTemplate="header">
+                       <tr>
+                            <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
+                            <th>Status</th>
+                            <th class="col-acoes"></th>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template pTemplate="emptymessage">
+                        Nenhum lançamento encontrado
+                      </ng-template>
+
+                          <ng-template pTemplate="body" let-pes>
+                              <tr>
+                                 <td>{{pes.nome}}</td>
+                                 <td>{{pes.endereco.cidade}}</td>
+                                  <td>{{pes.endereco.estado}}</td>
+
+                                  <td align="center" >
+                                        <a #status href="javascript:;" [pTooltip]="pes.ativo ? 'Desativar' : 'Ativar'"
+                                            tooltipPosition="top" (click)="alternarStatus(pes)">
+                                          {{ pes.ativo ? 'Ativo' : 'Inativo' }}
+                                        </a>
+                                  </td>
+
+                                      <td class="col-acoes">
+                                          <a pButton class="espaco-icones" pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"></a>
+                                          <button pButton class="espaco-icones" pTooltip="Deletar" tooltipPosition="top" icon="pi pi-trash"
+                                          (click)="confirmarExclusaoPessoa(pes)"></button>
+                                      </td>
+                              </tr>
+                          </ng-template>
+                </p-table>
+        </div>
+
+              <div class="ui-g-12">
+                <a pButton label="Nova Pessoa"></a>
+              </div>
+
+
   </div>
-
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <app-pessoa-grid [pessoas]="pessoas"></app-pessoa-grid>
-    </div>
-
-    <div class="ui-g-12">
-      <a pButton label="Nova Pessoa"></a>
-    </div>
-
-  </div>
-
 </div>

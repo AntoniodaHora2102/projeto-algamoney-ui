@@ -15,6 +15,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LancamentoPesquisaComponent } from './lancamentos/lancamento-pesquisa/lancamento-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoas/pessoa-cadastro/pessoa-cadastro.component';
 
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: 'lancamentos', component: LancamentoPesquisaComponent },
@@ -23,6 +25,7 @@ const routes: Routes = [
   { path: 'pessoas', component: PessoaCadastroComponent},
   { path: 'pessoas/nova', component: PesquisaPessoaComponent}
 ];
+
 
 
 @NgModule({
@@ -34,6 +37,8 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot( routes ),
+    HttpModule,
+    HttpClientModule,
 
     LancamentosModule,
     PessoasModule,

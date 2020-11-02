@@ -1,31 +1,80 @@
 <div class="container">
   <form>
     <div class="ui-g">
-      <div class="ui-g-12">
-        <h1> Lançamentos </h1>
-      </div>
 
-      <div class="ui-g-12 ui-fluid">
-        <label>Descrição</label>
-        <input pInputText type="text">
-      </div>
+      <!--Adicionamos um FORM / adicionamos o ngSubmit com o metodo pesquisar-->
+      <form autocomplete="off" (ngSubmit)="pesquisar()">
+          <div class="ui-g-12">
+            <h1> Lançamentos </h1>
+          </div>
 
-      <div class="ui-g-12">
-        <label style="display: block;">Vencimento</label>
-        <input pInputText type="text" style="width: 95px;">
+          <!-- Teremos que realizar um Binding no input de Descricao-->
+          <div class="ui-g-12 ui-fluid">
+            <label>Descrição</label>
+            <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
+          </div>
 
-        <label> até </label>
-        <input pInputText type="text" style="width: 95px;">
-      </div>
+          <div class="ui-g-12">
+            <label style="display: block;">Vencimento</label>
+           <!-- <input pInputText type="text" style="width: 95px;">-->
+            <!--passando as propriedades do componentes de pesquisa e o service de pesquisa-->
+            <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+              name="vencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"></p-calendar>
 
-      <div class="ui-g-12">
-        <button pButton type="submit" label="Pesquisar"></button>
-      </div>
+            <label> até </label>
+            <!--<input pInputText type="text" style="width: 95px;">-->
+            <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px'}"
+            name="vencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"></p-calendar>
+          </div>
+
+          <div class="ui-g-12">
+            <button pButton type="submit" label="Pesquisar"></button>
+          </div>
+       </form>
     </div>
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <app-lancamentos-grid [lancamentos]="lancamentos"></app-lancamentos-grid>
+        <p-table [value]="lancamentos" [responsive]="true"
+            [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
+             [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)"
+             #tabela>
+             <!--Lazy = busca os dados por demanda / total Records = ira busca todos os resultado dos registro /
+              onLazyLoad =  e chamada toda vez que uma pagina for carregar dados novos-->
+
+           <!--Ecxluimos componente Lancamento-Pesquisa-Grid e copiamos a tabela, pois não iremos reutilizar o Lancamento GRID -->
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Pessoa</th>
+                  <th>Decscrição</th>
+                  <th class="col-data-header"> Vencimento</th>
+                  <th class="col-data-header"> Pagamento </th>
+                  <th class="col-valor-header"> Valor</th>
+                  <th class="col-acoes"></th>
+              </tr>
+            </ng-template>
+
+              <ng-template pTemplate="emptymessage">
+                Nenhum lançamento encontrado
+              </ng-template>
+
+            <ng-template pTemplate="body" let-lancamento >
+
+              <tr>
+                  <td>{{lancamento.pessoa}}</td>
+                  <td>{{lancamento.descricao}}</td>
+                  <td class="col-data-content">{{lancamento.dataVencimento | date: 'dd/MM/y'}}</td>
+                  <td class="col-data-content">{{lancamento.dataPagamento}}</td>
+                  <td class="col-valor-content" [style.color]=" lancamento.tipo === 'DESPESA' ? 'red' : 'blue'"> {{lancamento.valor | currency : 'BRL':true:'1.2-2'}} </td>
+                  <td class="col-acoes">
+                    <a pButton class="espaco-icones" pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"></a>
+                    <button pButton class="espaco-icones" pTooltip="Deletar"
+                    tooltipPosition="top" icon="pi pi-trash" (click)="confirmarExclusao(lancamento)"></button>
+                  </td>
+              </tr>
+            </ng-template>
+
+          </p-table>
       </div>
 
       <div class="ui-g-12">
