@@ -8,14 +8,14 @@ import { LancamentosModule } from './lancamentos/lancamentos.module';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LancamentoPesquisaComponent } from './lancamentos/lancamento-pesquisa/lancamento-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoas/pessoa-cadastro/pessoa-cadastro.component';
 
-import { HttpModule } from '@angular/http';
+import { HttpModule, URLSearchParams } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [

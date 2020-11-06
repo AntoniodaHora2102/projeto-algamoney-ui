@@ -1,3 +1,6 @@
+import { ToastyService } from 'ng2-toasty';
+
+import { LancamentoService } from './../lancamento.service';
 import { Lancamento } from './../../core/model';
 import { PessoasService } from './../../pessoas/pessoas.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -30,6 +33,8 @@ export class LancamentoCadastroComponent implements OnInit {
 
     private pessoaService: PessoasService,
     private categoriaService: CategoriaService,
+    private lancamentoService: LancamentoService,
+    private toast: ToastyService,
     private errorHandlerService: ErrorHandlerService
   ) { }
 
@@ -41,7 +46,19 @@ export class LancamentoCadastroComponent implements OnInit {
 
   //metodo para salvar os dados front para BackEnd
   salvar(form: NgForm) {
-    console.log(this.lancamento);
+    this.lancamentoService.adicionar(this.lancamento)
+    .then(() => {
+
+      //caso esteja tudo correto a mensagem de sucesso sera exibida
+      this.toast.success('Lancamento adicionado com Sucesso');
+
+      //irá resetar as informações do formulário
+      form.reset();
+
+      //instanciamos o lancamento para que o mesmo retorne vazio
+      this.lancamento = new Lancamento();
+    })
+    .catch( erro => this.errorHandlerService.handle(erro));
   }
 
   //ira carregar as informacoes do metodo listaCategorias
