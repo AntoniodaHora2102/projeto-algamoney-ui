@@ -63,7 +63,7 @@
               <tr>
                   <td>{{lancamento.pessoa}}</td>
                   <td>{{lancamento.descricao}}</td>
-                  <td class="col-data-content">{{lancamento.dataVencimento | date: 'dd/MM/y': 'TimeZone.getDefault().getID())'}}</td>
+                  <td class="col-data-content">{{lancamento.dataVencimento | date: 'dd/MM/y':'TimeZone.getDefault().getID())'}}</td>
                   <td class="col-data-content">{{lancamento.datapagamento | date: 'dd/MM/y':'TimeZone.getDefault().getID())'}}</td>
                   <td class="col-valor-content" [style.color]=" lancamento.tipo === 'DESPES' ? 'red' : 'blue'"> {{lancamento.valor | currency : 'BRL':true:'1.2-2'}} </td>
                   <td class="col-acoes">

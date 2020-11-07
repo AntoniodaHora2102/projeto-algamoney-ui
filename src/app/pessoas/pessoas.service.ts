@@ -2,6 +2,7 @@ import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
+import { Pessoa } from '../core/model';
 
 export class PessoasFiltro {
   //filtrando pessoas pelo nome
@@ -90,5 +91,17 @@ export class PessoasService {
     return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
     .toPromise()
     .then(() => null);
+  }
+
+  //IRA ENVIAR AS INFORMACOES PARA DO FRONT PARA O BACKEND
+  adicionar(pessoa: Pessoa): Promise<void> {
+
+    const headers = new Headers();
+         headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+         headers.append('Content-Type', 'application/json');
+
+    return this.http.post(this.pessoasUrl, JSON.stringify(pessoa), { headers })
+    .toPromise()
+    .then( response => response.json());
   }
 }

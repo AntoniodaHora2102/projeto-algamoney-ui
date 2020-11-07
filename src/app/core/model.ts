@@ -1,6 +1,20 @@
 //irá representa pessoa
 export class Pessoa {
   codigo: number;
+  nome: string;
+  endereco = new Endereco();
+  ativo = true;
+}
+
+export class Endereco {
+  logradouro: string;
+  numero: string;
+  bairro: string;
+  cep: string;
+  cidade: string;
+  complemento: string;
+  estado: string;
+
 }
 
 //ira representa categoria

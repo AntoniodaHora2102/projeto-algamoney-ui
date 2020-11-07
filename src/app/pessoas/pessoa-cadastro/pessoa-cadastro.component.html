@@ -1,5 +1,5 @@
 <div class="container">
-  <form>
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
     <div class="ui-g">
         <div class="ui-g-12">
           <h1>Nova Pessoa</h1>
@@ -8,42 +8,42 @@
 
     <div class="ui-g-12 ui-md-12 ui-fluid">
       <label> Nome</label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="nome" [(ngModel)]="pessoa.nome">
     </div>
 
     <div class="ui-g-12 ui-md-9 ui-fluid">
       <label> Logadouro</label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="logadouro" [(ngModel)]="pessoa.endereco.logradouro">
     </div>
 
     <div class="ui-g-12 ui-md-3 ui-fluid">
       <label> Número</label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="numero" [(ngModel)]="pessoa.endereco.numero">
     </div>
 
     <div class="ui-g-12 ui-md-4 ui-fluid">
       <label> Complemento </label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="complemento" [(ngModel)]="pessoa.endereco.complemento">
     </div>
 
     <div class="ui-g-12 ui-md-4 ui-fluid">
       <label> Bairro </label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="bairro" [(ngModel)]="pessoa.endereco.bairro">
     </div>
 
     <div class="ui-g-12 ui-md-4 ui-fluid">
       <label> CEP</label>
-      <p-inputMask mask="99.999-999" ></p-inputMask>
+      <p-inputMask mask="99.999-999" name="cep" [(ngModel)]="pessoa.endereco.cep" ></p-inputMask>
     </div>
 
     <div class="ui-g-12 ui-md-6 ui-fluid">
       <label> Cidade </label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="cidade" [(ngModel)]="pessoa.endereco.cidade">
     </div>
 
     <div class="ui-g-12 ui-md-6 ui-fluid">
       <label> Estado </label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="estado" [(ngModel)]="pessoa.endereco.estado">
     </div>
 
     <div class="ui-g-12">
