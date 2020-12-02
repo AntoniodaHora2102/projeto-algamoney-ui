@@ -18,7 +18,10 @@ import { PessoaCadastroComponent } from './pessoas/pessoa-cadastro/pessoa-cadast
 import { HttpModule, URLSearchParams } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
+//link as rotas para acessos as páginas as urls de cada component
 const routes: Routes = [
+
+  //objetos que representam os routes de cada de component
   { path: 'lancamentos', component: LancamentoPesquisaComponent },
   { path: 'lancamentos/novo', component: LancamentoCadastroComponent},
   { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent},
