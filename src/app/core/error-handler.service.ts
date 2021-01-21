@@ -10,7 +10,7 @@ export class ErrorHandlerService {
   constructor(private toasty: ToastyService) { }
 
     handle(errorResponse: any) {
-      //mensagem de error
+      //mensagem de error for string 
       let msg: string;
 
       if (typeof errorResponse === 'string') {

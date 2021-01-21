@@ -1,55 +1,58 @@
 <div class="container">
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+   
     <div class="ui-g">
         <div class="ui-g-12">
-          <h1>Nova Pessoa</h1>
+   
+          <h1> {{ editando ? 'Edição de' : 'Nova'}} Pessoa </h1>
+   
         </div>
     </div>
 
     <div class="ui-g-12 ui-md-12 ui-fluid">
       <label> Nome</label>
-      <input pInputText type="text" name="nome" [(ngModel)]="pessoa.nome">
+      <input pInputText type="text" name="nome" [(ngModel)]="pessoa.nome" required>
     </div>
 
     <div class="ui-g-12 ui-md-9 ui-fluid">
       <label> Logadouro</label>
-      <input pInputText type="text" name="logadouro" [(ngModel)]="pessoa.endereco.logradouro">
+      <input pInputText type="text" name="logadouro" [(ngModel)]="pessoa.endereco.logradouro" required>
     </div>
 
     <div class="ui-g-12 ui-md-3 ui-fluid">
       <label> Número</label>
-      <input pInputText type="text" name="numero" [(ngModel)]="pessoa.endereco.numero">
+      <input pInputText type="text" name="numero" [(ngModel)]="pessoa.endereco.numero" required>
     </div>
 
     <div class="ui-g-12 ui-md-4 ui-fluid">
       <label> Complemento </label>
-      <input pInputText type="text" name="complemento" [(ngModel)]="pessoa.endereco.complemento">
+      <input pInputText type="text" name="complemento" [(ngModel)]="pessoa.endereco.complemento" required>
     </div>
 
     <div class="ui-g-12 ui-md-4 ui-fluid">
       <label> Bairro </label>
-      <input pInputText type="text" name="bairro" [(ngModel)]="pessoa.endereco.bairro">
+      <input pInputText type="text" name="bairro" [(ngModel)]="pessoa.endereco.bairro" required>
     </div>
 
     <div class="ui-g-12 ui-md-4 ui-fluid">
       <label> CEP</label>
-      <p-inputMask mask="99.999-999" name="cep" [(ngModel)]="pessoa.endereco.cep" ></p-inputMask>
+      <p-inputMask mask="99.999-999" name="cep" [(ngModel)]="pessoa.endereco.cep" required ></p-inputMask>
     </div>
 
     <div class="ui-g-12 ui-md-6 ui-fluid">
       <label> Cidade </label>
-      <input pInputText type="text" name="cidade" [(ngModel)]="pessoa.endereco.cidade">
+      <input pInputText type="text" name="cidade" [(ngModel)]="pessoa.endereco.cidade" required>
     </div>
 
     <div class="ui-g-12 ui-md-6 ui-fluid">
       <label> Estado </label>
-      <input pInputText type="text" name="estado" [(ngModel)]="pessoa.endereco.estado">
+      <input pInputText type="text" name="estado" [(ngModel)]="pessoa.endereco.estado" required>
     </div>
 
     <div class="ui-g-12">
-      <button pButton type="submit" label="SALVAR"></button>
-      <button pButton type="button" label="NOVO" class="ui-button-success"></button>
-      <a href="#"> Voltar para a pesquisa</a>
+      <button pButton type="submit" label="SALVAR"  [disabled]="!f.valid"></button>
+      <button pButton type="button" label="NOVO" class="ui-button-success" (click)="novo(f)"></button>
+      <a routerLink="/pessoas"> Voltar para a pesquisa</a>
     </div>
 
   </form>

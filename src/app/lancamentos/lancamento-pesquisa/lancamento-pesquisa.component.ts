@@ -4,6 +4,7 @@ import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandlerService } from './../../core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamento-pesquisa',
@@ -36,12 +37,19 @@ export class LancamentoPesquisaComponent implements OnInit {
     private toast: ToastyService,
     private erroHandler: ErrorHandlerService,
 
+    //servico que altera o titulo da aba do sistema
+    private title: Title,
+
     //servico de dialogo para solicitar a confirmacao do usuario se deseja realmente excluir
     private confirmation: ConfirmationService
     ) { }
 
   ngOnInit() {
-   // this.pesquisar(); - nao sera necessario chamar o metodo pesuisa no ngOnInit pois o metodo aoMudarPagina ira realizar essa pesquisa
+    
+    //insere o novo titulo na aba
+    this.title.setTitle('Pesquisa de Lançamentos');
+  
+    // this.pesquisar(); - nao sera necessario chamar o metodo pesuisa no ngOnInit pois o metodo aoMudarPagina ira realizar essa pesquisa
   }
 
   //metodo que realiza a pesquisa do objetos

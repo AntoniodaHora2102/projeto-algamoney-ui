@@ -9,9 +9,12 @@ import { ToastyConfig } from 'ng2-toasty';
 })
 export class AppComponent {
 
-  constructor(private toastConfig: ToastyConfig, private router: Router) {
+  constructor(
+    private toastConfig: ToastyConfig, 
+    private router: Router
+    )
+    {
     this.toastConfig.theme = 'bootstrap';
-
   }
 
   exibindoNavBar() {

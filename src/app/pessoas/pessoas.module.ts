@@ -1,10 +1,13 @@
 import { SharedModule } from './../shared/shared.module';
+import { NgModule } from '@angular/core';
+import { PessoasRoutingModule } from './pessoas-routing.module';
+
 
 import { InputMaskModule } from 'primeng/inputmask';
 import { PesquisaPessoaComponent } from './pesquisa-pessoa/pesquisa-pessoa.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
-import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
@@ -25,13 +28,11 @@ import { FormsModule } from '@angular/forms';
     PessoaCadastroComponent,
     PesquisaPessoaComponent
   ],
-  exports: [
-    PesquisaPessoaComponent,
-    PessoaCadastroComponent
-  ],
+  exports: [],
   imports: [
     CommonModule,
     FormsModule,
+   
 
     InputTextModule,
     ButtonModule,
@@ -43,7 +44,9 @@ import { FormsModule } from '@angular/forms';
     InputMaskModule,
     CurrencyMaskModule,
 
-    SharedModule
+    SharedModule,
+
+    PessoasRoutingModule
   ]
 })
 export class PessoasModule { }

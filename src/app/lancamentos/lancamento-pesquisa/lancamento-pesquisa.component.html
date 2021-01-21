@@ -65,9 +65,15 @@
                   <td>{{lancamento.descricao}}</td>
                   <td class="col-data-content">{{lancamento.dataVencimento | date: 'dd/MM/y':'TimeZone.getDefault().getID())'}}</td>
                   <td class="col-data-content">{{lancamento.datapagamento | date: 'dd/MM/y':'TimeZone.getDefault().getID())'}}</td>
-                  <td class="col-valor-content" [style.color]=" lancamento.tipo === 'DESPES' ? 'red' : 'blue'"> {{lancamento.valor | currency : 'BRL':true:'1.2-2'}} </td>
+                  <td class="col-valor-content" [style.color]=" lancamento.tipo === 'DESPES' ? 'red' : 'blue'"> 
+                                {{lancamento.valor | currency : 'BRL':true:'1.2-2'}} </td>
                   <td class="col-acoes">
-                    <a pButton class="espaco-icones" pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"></a>
+
+                    <!--link para editar formulario-->
+                    <a pButton class="espaco-icones" pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
+                    [routerLink]="['/lancamentos', lancamento.codigo]"></a>
+                    
+                    <!--botao para excluir lancamento -->
                     <button pButton class="espaco-icones" pTooltip="Deletar"
                     tooltipPosition="top" icon="pi pi-trash" (click)="confirmarExclusao(lancamento)"></button>
                   </td>
@@ -78,7 +84,7 @@
       </div>
 
       <div class="ui-g-12">
-        <a pButton label="Novo Lançamento" routerLink="/lancamentos/novo"></a>
+        <a pButton label="Novo Lançamento" routerLink="/lancamentos/novo" ></a>
       </div>
 
     </div>

@@ -1,8 +1,9 @@
 <div class="container">
+  <form>
    <div class="ui-g">
 
         <form autocomplete="off" (ngSubmit)="pesquisar()">
-
+          
                 <div class="ui-g-12">
                     <h1> Pessoas </h1>
                 </div>
@@ -54,9 +55,11 @@
                                   </td>
 
                                       <td class="col-acoes">
-                                          <a pButton class="espaco-icones" pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"></a>
-                                          <button pButton class="espaco-icones" pTooltip="Deletar" tooltipPosition="top" icon="pi pi-trash"
-                                          (click)="confirmarExclusaoPessoa(pes)"></button>
+                                          <a pButton class="espaco-icones" pTooltip="Editar" tooltipPosition="top" 
+                                          icon="pi pi-pencil" [routerLink]="['/pessoas', pes.codigo]"></a>
+
+                                          <button pButton class="espaco-icones" pTooltip="Deletar" tooltipPosition="top" 
+                                          icon="pi pi-trash" (click)="confirmarExclusaoPessoa(pes)"></button>
                                       </td>
                               </tr>
                           </ng-template>
@@ -64,9 +67,10 @@
         </div>
 
               <div class="ui-g-12">
-                <a pButton label="Nova Pessoa"></a>
+                <a pButton label="Nova Pessoa" routerLink="/pessoas/nova"></a>
               </div>
 
 
-  </div>
+    </div>
+  </form>
 </div>
