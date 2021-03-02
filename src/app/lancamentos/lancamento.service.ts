@@ -9,6 +9,7 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 import { AuthHttp } from 'angular2-jwt';
+import { environment } from 'src/environments/environment';
 
 //interface sera alterado para class para que possa recebr os novos atributos.
 export class LancamentoFiltro {
@@ -25,11 +26,17 @@ export class LancamentoFiltro {
 export class LancamentoService {
 
   //chamada da url
-  lancamentosUrl = 'http://localhost:8080/lancamento';
+  //lancamentosUrl = 'http://localhost:8080/lancamento';
+
+  //url através do enviroonment de desenvolvimento
+  lancamentosUrl: string;
 
   //serivco http
   //o http será alterado para o AuthHttp 
-  constructor(private http: AuthHttp) {}
+  constructor( private http: AuthHttp ) 
+    {
+      this.lancamentosUrl = `${environment.apiUrl}/lancamento`;
+    }
 
         //metodo que ira realiza a pesquisa no backEnd e trazer para o frontEnd
         //para realizar a pesquisa personalizada iremos utilizar um filtro no metodo pesquisar

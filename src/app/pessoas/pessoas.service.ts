@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { Pessoa } from '../core/model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { AuthHttp } from 'angular2-jwt';
+import { environment } from 'src/environments/environment';
 
 export class PessoasFiltro {
   //filtrando pessoas pelo nome
@@ -20,9 +21,13 @@ export class PessoasFiltro {
 export class PessoasService {
 
   //url para carregar as informacoes da API
-  pessoasUrl = 'http://localhost:8080/pessoas';
+  //pessoasUrl = 'http://localhost:8080/pessoas';
 
-  constructor(private http: AuthHttp) {}
+  pessoasUrl : string;
+
+  constructor(private http: AuthHttp) {
+    this.pessoasUrl = `${environment.apiUrl}/pessoas`;
+  }
 
    pesquisar(filtro: PessoasFiltro): Promise<any> {
 

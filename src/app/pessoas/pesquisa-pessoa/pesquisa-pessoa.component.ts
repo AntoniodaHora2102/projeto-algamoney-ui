@@ -5,6 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 
 import { ToastyService } from 'ng2-toasty';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-pesquisa-pessoa',
@@ -22,6 +23,7 @@ export class PesquisaPessoaComponent {
 
   constructor(
     private pessoasService: PessoasService,
+    public auth: AuthService, // o auth deve está com public para que possa ser enxergado
     private errorHandler: ErrorHandlerService,
     private toast: ToastyService,
 

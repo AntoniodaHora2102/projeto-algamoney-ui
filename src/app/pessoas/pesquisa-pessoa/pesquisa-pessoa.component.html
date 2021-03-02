@@ -59,7 +59,8 @@
                                           icon="pi pi-pencil" [routerLink]="['/pessoas', pes.codigo]"></a>
 
                                           <button pButton class="espaco-icones" pTooltip="Deletar" tooltipPosition="top" 
-                                          icon="pi pi-trash" (click)="confirmarExclusaoPessoa(pes)"></button>
+                                          icon="pi pi-trash" (click)="confirmarExclusaoPessoa(pes)"
+                                          [disabled]="!auth.temPermissao('ROLE_REMOVER_PESSOA')"></button>
                                       </td>
                               </tr>
                           </ng-template>
@@ -67,7 +68,7 @@
         </div>
 
               <div class="ui-g-12">
-                <a pButton label="Nova Pessoa" routerLink="/pessoas/nova"></a>
+                <a pButton label="Nova Pessoa" routerLink="/pessoas/nova" *ngIf="auth.temPermissao('ROLE_CADASTRAR_PESSOA')"></a>
               </div>
 
 

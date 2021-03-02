@@ -3,7 +3,7 @@
     <div class="ui-g">
 
       <!--Adicionamos um FORM / adicionamos o ngSubmit com o metodo pesquisar-->
-      <form autocomplete="off" (ngSubmit)="pesquisar()">
+      <form autocomplete="off" (ngSubmit)="pesquisar()" #f="ngForm">
           <div class="ui-g-12">
             <h1> Lançamentos </h1>
           </div>
@@ -75,7 +75,8 @@
                     
                     <!--botao para excluir lancamento -->
                     <button pButton class="espaco-icones" pTooltip="Deletar"
-                    tooltipPosition="top" icon="pi pi-trash" (click)="confirmarExclusao(lancamento)"></button>
+                    tooltipPosition="top" icon="pi pi-trash" (click)="confirmarExclusao(lancamento)"
+                    [disabled]="!auth.temPermissao('ROLE_REMOVER_LANCAMENTO')" ></button>
                   </td>
               </tr>
             </ng-template>
@@ -84,7 +85,7 @@
       </div>
 
       <div class="ui-g-12">
-        <a pButton label="Novo Lançamento" routerLink="/lancamentos/novo" ></a>
+        <a pButton label="Novo Lançamento" routerLink="/lancamentos/novo"  ></a>
       </div>
 
     </div>

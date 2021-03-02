@@ -4,6 +4,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { promise } from 'protractor';
 
 import 'rxjs/add/operator/toPromise';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,21 @@ import 'rxjs/add/operator/toPromise';
 export class AuthService {
 
   //variavel de acesso ao endereco da requisicao de login da api
-  oauthTokenUrl = 'http://localhost:8080/oauth/token';
+  //oauthTokenUrl = 'http://localhost:8080/oauth/token';
 
+  oauthTokenUrl : string;
+  
   //será um objeto javascript
   jwtPayload: any;
   
   constructor(
     private http: Http,
     private jwtHelper: JwtHelper
-  ) { this.carregarToken(); }
+  ) { 
+    this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`; 
+    this.carregarToken();
+     
+  }
 
   //metodo será enviadas as informações do copo da api 
   //para termos acesso ao login da aplicacao
@@ -68,9 +75,45 @@ export class AuthService {
 
   }
 
+  //verifica se ha token valido ou nao
+  isAccessTokenInvalido() {
+    
+    //vamos criar uma variavel que ira pegar o token valido
+    const token= localStorage.getItem('token');
+
+    //caso nao tenha token valido ou se expirou
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
+
    //metodo que ira verificar se o usuário tem ou nao permissao para acessar aos menus
    temPermissao( permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  /* este metodo ira receber um array de permissao (permissoes codificadas na api).
+  onde o mesmo ira verificar se usuario possui ou nao acesso as rotas
+  */
+  temQualquerPermissao(roles) {
+
+    //verifica a permissao de todos os usuarios
+    for (const role of roles) {
+      
+      //caso o usuario tenha alguma destas permissoes retornar true (permite acesso)
+      if (this.temPermissao(role)) {
+        return true;
+      }
+    }
+    // caso nao tenha permissao retornar falso
+    return false;
+  }
+
+  //iremos limpar o cookie do navegador
+  limparAccessToken() {
+    localStorage.removeItem('token');
+
+    //remove a informacao que ha dentro do jwtPayload (elimina o accessToken)
+    this.jwtPayload = null;
   }
 
   //metodo para obter um access token atraveś do refreshToken
@@ -78,11 +121,10 @@ export class AuthService {
 
     //variaveis de solicitação
     const headers = new Headers();
-    headers.append('Authorization' , ' Basic YW5ndWxhcjphZG1pbg==');
-
-
-    //envia o corpo do http para informar ao servidor o tipo da informacao
+     //envia o corpo do http para informar ao servidor o tipo da informacao
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    headers.append('Authorization' , ' Basic YW5ndWxhcjphZG1pbg==');
 
     const body = 'grant_type=refresh_token';
     

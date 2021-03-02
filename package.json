@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js", // alterado de ng server para node server.js
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --prod" //adicionado para que o heroku consulte as chaves
   },
   "private": true,
   "dependencies": {
@@ -33,9 +34,7 @@
     "rxjs": "~6.5.4",
     "rxjs-compat": "^6.6.3",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
-  },
-  "devDependencies": {
+    "zone.js": "~0.10.2",
     "@angular-devkit/build-angular": "~0.901.0",
     "@angular/cli": "~9.1.0",
     "@angular/compiler-cli": "~9.1.0",
@@ -55,5 +54,11 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.8.3"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": "14.15.1",
+    "npm": "6.14.8" 
   }
 }
